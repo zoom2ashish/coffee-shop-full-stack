@@ -3,6 +3,8 @@ import { DrinksService, Drink } from '../../services/drinks.service';
 import { ModalController } from '@ionic/angular';
 import { DrinkFormComponent } from './drink-form/drink-form.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-drink-menu',
@@ -12,11 +14,17 @@ import { AuthService } from 'src/app/services/auth.service';
 export class DrinkMenuPage implements OnInit {
   Object = Object;
 
+  items$: Observable<Drink[]>;
+
   constructor(
     private auth: AuthService,
     private modalCtrl: ModalController,
     public drinks: DrinksService
-    ) { }
+    ) {
+      this.items$ = this.drinks.items$.pipe(
+        map(items => Object.values(items))
+      );
+    }
 
   ngOnInit() {
     this.drinks.getDrinks();
@@ -32,7 +40,12 @@ export class DrinkMenuPage implements OnInit {
       componentProps: { drink: activedrink, isNew: !activedrink }
     });
 
-    modal.present();
+    await modal.present();
+
+    const modalData: any = await modal.onDidDismiss();
+
+    if (modalData.type === 'close') {
+    }
   }
 
 }

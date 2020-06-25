@@ -1,9 +1,15 @@
-<div class="cup">
-  <div 
-  *ngFor="let ingredient of drink && drink.recipe"
-  class="ingredient"
-  [style.flexGrow]="ingredient.parts"
-  [style.background]="ingredient.color">
-    {{t}}
-  </div>
-</div>
+<ion-card class="drink-graphic-card"
+  style="align-items: center; display: flex; flex-direction: column; cursor: pointer;">
+  <ion-card-header>
+    <ion-card-title>{{drink.title}}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <div class="cup">
+      <div *ngFor="let ingredient of drink && drink.recipe" class="ingredient" [style.flexGrow]="ingredient.parts"
+        [style.background]="ingredient.color">
+        {{ t }}
+      </div>
+    </div>
+  </ion-card-content>
+</ion-card>

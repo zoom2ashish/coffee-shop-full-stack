@@ -1,3 +1,7 @@
+:host {
+    display: flex;
+    justify-content: center;
+}
 .cup {
     width: 50px;
     height: 50px;
@@ -10,4 +14,8 @@
 .ingredient {
     width: 50px;
     flex-grow: 1;
+}
+
+.drink-graphic-card {
+    background-color: burlywood;
 }

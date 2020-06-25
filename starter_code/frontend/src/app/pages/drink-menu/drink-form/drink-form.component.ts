@@ -41,17 +41,20 @@ export class DrinkFormComponent implements OnInit {
     this.drink.recipe.splice(i, 1);
   }
 
-  closeModal() {
-    this.modalCtrl.dismiss();
+  closeModal(type: string) {
+    this.modalCtrl.dismiss({
+      type
+    });
   }
 
   saveClicked() {
-    this.drinkService.saveDrink(this.drink);
-    this.closeModal();
+    this.drinkService.saveDrink(this.drink).subscribe(() => {
+      this.closeModal('close');
+    });
   }
 
   deleteClicked() {
     this.drinkService.deleteDrink(this.drink);
-    this.closeModal();
+    this.closeModal('cancel');
   }
 }
