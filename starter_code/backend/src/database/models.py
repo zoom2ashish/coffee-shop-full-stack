@@ -5,7 +5,8 @@ import json
 
 database_filename = "database.db"
 project_dir = os.path.dirname(os.path.abspath(__file__))
-database_path = "sqlite:///{}".format(os.path.join(project_dir, database_filename))
+database_path = "sqlite:///{}".format(os.path.join(project_dir,
+                                      database_filename))
 
 db = SQLAlchemy()
 
@@ -35,6 +36,7 @@ def db_drop_and_create_all():
     db.drop_all()
     db.create_all()
 
+
 '''
 Drink
 a persistent drink entity, extends the base SQLAlchemy Model
@@ -47,7 +49,8 @@ class Drink(db.Model):
     # String Title
     title = Column(String(80), unique=True)
     # the ingredients blob - this stores a lazy json blob
-    # the required datatype is [{'color': string, 'name':string, 'parts': number}]
+    # the required datatype is
+    #   [{'color': string, 'name':string, 'parts': number}]
     recipe = Column(String(180), nullable=False)
 
     '''
